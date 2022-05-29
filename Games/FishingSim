@@ -1,10 +1,11 @@
-local g = Window666:CreateFolder("Fishing Sim")
+local Window1 = library:CreateWindow("FishingSim");
+local a = Window666:CreateFolder("Fishing Sim")
 
-g:Button("Port Jackson",function()
+a:Button("Port Jackson",function()
      teleport(CFrame.new(1.8703980445862, 53.57190322876, -188.37982177734))
 end)
 
-g:Toggle("Auto Caught",function(bool)
+a:Toggle("Auto Caught",function(bool)
     shared.toggle = bool
      if shared.toggle == true then
 
@@ -23,7 +24,7 @@ g:Toggle("Auto Caught",function(bool)
         end
 end)
 
-g:Toggle("Auto Sell",function(bool)
+a:Toggle("Auto Sell",function(bool)
     shared.toggle = bool
      if shared.toggle == true then
     autoSell = RunService.Stepped:Connect(function()
@@ -35,7 +36,7 @@ g:Toggle("Auto Sell",function(bool)
         end
 end)
 
-g:Toggle("Auto Map Chest",function(bool)
+a:Toggle("Auto Map Chest",function(bool)
     shared.toggle = bool
      if shared.toggle == true then
     autoChest = RunService.Stepped:Connect(function()
@@ -53,7 +54,7 @@ g:Toggle("Auto Map Chest",function(bool)
           teleport(CFrame.new(1.8703980445862, 53.57190322876, -188.37982177734))
         end
 end)
-g:Button("Suken Ship",function()
+a:Button("Suken Ship",function()
  for i, v in pairs(game.Workspace:GetChildren()) do
     if string.find(v.Name, "ShipModel") then
             teleport(v.HitBox.CFrame)
