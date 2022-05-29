@@ -1,0 +1,63 @@
+local g = Window666:CreateFolder("Fishing Sim")
+
+g:Button("Port Jackson",function()
+     teleport(CFrame.new(1.8703980445862, 53.57190322876, -188.37982177734))
+end)
+
+g:Toggle("Auto Caught",function(bool)
+    shared.toggle = bool
+     if shared.toggle == true then
+
+    
+    autoCaught = coroutine.wrap(function()
+        while true and shared.toggle == true do
+            wait(1.0)
+            warn("Caught")
+            game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.FishCaught:FireServer()
+        end
+    end)()
+
+    else
+          autoCaught:Disconnect()
+          teleport(CFrame.new(1.8703980445862, 53.57190322876, -188.37982177734))
+        end
+end)
+
+g:Toggle("Auto Sell",function(bool)
+    shared.toggle = bool
+     if shared.toggle == true then
+    autoSell = RunService.Stepped:Connect(function()
+            game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.processGameItemSold:InvokeServer("SellEverything")
+     end)
+    else
+         autoSell:Disconnect()
+         
+        end
+end)
+
+g:Toggle("Auto Map Chest",function(bool)
+    shared.toggle = bool
+     if shared.toggle == true then
+    autoChest = RunService.Stepped:Connect(function()
+            
+ for i, v in pairs(game.Workspace.RandomChests:GetChildren()) do
+            if v:IsA("Model") then
+                  teleport(v.HumanoidRootPart.CFrame + Vector3.new(0, 0, 0))
+                  wait(0.25)
+                  fireproximityprompt(v.HumanoidRootPart.ProximityPrompt)
+            end
+        end
+     end)
+    else
+         autoChest:Disconnect()
+          teleport(CFrame.new(1.8703980445862, 53.57190322876, -188.37982177734))
+        end
+end)
+g:Button("Suken Ship",function()
+ for i, v in pairs(game.Workspace:GetChildren()) do
+    if string.find(v.Name, "ShipModel") then
+            teleport(v.HitBox.CFrame)
+        break
+     end
+  end
+end)
